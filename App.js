@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Provider } from 'mobx-react';
 import { Root } from 'native-base';
 import RootNavigation from './navigation/RootNavigation';
+import stores from './stores'
 
 export default class App extends React.Component {
   state = {
@@ -26,11 +27,13 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
-          <RootNavigation />
-        </View>
+        <Root>
+          <Provider {...stores}>
+            <View style={styles.container}>
+              <RootNavigation />
+            </View>
+          </Provider>
+        </Root>
       );
     }
   }
