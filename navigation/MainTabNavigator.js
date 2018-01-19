@@ -5,20 +5,24 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import HomeScreen from '../screens/BottomBar/HomeScreen';
+import JobsScreen from '../screens/BottomBar/JobsScreen';
+import MoreScreen from '../screens/BottomBar/MoreScreen';
+import NotificationsScreen from '../screens/BottomBar/NotificationsScreen';
 
 export default TabNavigator(
   {
     Home: {
       screen: HomeScreen,
     },
-    Links: {
-      screen: LinksScreen,
+    Notifications: {
+      screen: NotificationsScreen,
     },
-    Settings: {
-      screen: SettingsScreen,
+    Jobs: {
+      screen: JobsScreen,
+    },
+    More: {
+      screen: MoreScreen,
     },
   },
   {
@@ -27,24 +31,15 @@ export default TabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         switch (routeName) {
-          case 'Home':
-            iconName =
-              Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
-                : 'md-information-circle';
-            break;
-          case 'Links':
-            iconName = Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link';
-            break;
-          case 'Settings':
-            iconName =
-              Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options';
+          case 'Home': iconName = 'md-home'; break;
+          case 'Notifications': iconName = 'md-notifications'; break;
+          case 'Jobs': iconName = 'md-briefcase'; break;
+          case 'More': iconName = 'md-more'; break;          
         }
         return (
           <Ionicons
             name={iconName}
             size={28}
-            style={{ marginBottom: -3 }}
             color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
           />
         );
@@ -52,7 +47,7 @@ export default TabNavigator(
     }),
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
-    animationEnabled: false,
-    swipeEnabled: false,
+    animationEnabled: true,
+    swipeEnabled: true,
   }
 );
